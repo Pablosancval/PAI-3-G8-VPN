@@ -8,7 +8,8 @@ import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.time.LocalDateTime;
 
-import javax.net.SocketFactory;
+import javax.net.ssl.SSLSocket;
+import javax.net.ssl.SSLSocketFactory;
 
 // Java extension packages
 import javax.swing.*;
@@ -23,11 +24,11 @@ public class LoginClient {
         try {
             // obtain SocketFactory for creating Sockets
 
-            SocketFactory socketFactory = (SocketFactory) SocketFactory.getDefault();
+            SSLSocketFactory socketFactory = (SSLSocketFactory) SSLSocketFactory.getDefault();
 
             // create Socket from factory
 
-            Socket socket = (Socket) socketFactory.createSocket("localhost", 7070);
+            SSLSocket socket = (SSLSocket) socketFactory.createSocket("localhost", 7070);
 
             // create PrintWriter for sending login to server
 

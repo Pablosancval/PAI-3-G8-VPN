@@ -7,7 +7,9 @@ import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Objects;
 
-import javax.net.ServerSocketFactory;
+import javax.net.ssl.SSLServerSocket;
+import javax.net.ssl.SSLServerSocketFactory;
+import javax.net.ssl.SSLSocket;
 
 public class LoginServerSocket {
 private static final String CORRECT_USER_NAME = "meh";
@@ -25,19 +27,17 @@ private static final String HELLO_MESSAGE = "hola";
 
     // wait for client connection and check login information
 
-    ServerSocketFactory socketFactory = (ServerSocketFactory)
-    ServerSocketFactory.getDefault();
+    SSLServerSocketFactory socketFactory = (SSLServerSocketFactory) SSLServerSocketFactory.getDefault();
 
     String secretKey = "mysecretkey";
     ArrayList noncesRegistrados = new ArrayList<>();
     // create Socket from factory
     
-    ServerSocket serverSocket = (ServerSocket)
-    socketFactory.createServerSocket(7070);
+    SSLServerSocket serverSocket = (SSLServerSocket) socketFactory.createServerSocket(7070);
         while (true) {
             try {
                 System.err.println("Waiting for connection...");
-                Socket socket = serverSocket.accept();
+                SSLSocket socket = (SSLSocket) serverSocket.accept();
 
                 // open BufferedReader for reading data from client
 
